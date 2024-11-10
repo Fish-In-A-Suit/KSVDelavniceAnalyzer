@@ -3,6 +3,7 @@ Prebere excel tabelo delavnic in generira tekst tabelo z grupiranimi udeleženci
 """
 from goreverselookup import JsonUtil
 from datetime import datetime
+import os
 
 import pandas as pd
 
@@ -133,6 +134,9 @@ for termin_label in termini_set:
 
 	data = student_infos
 
+	if not os.path.exists("delavnice"):
+		os.mkdir("delavnice")
+		
 	# ustvari dataframe za ta termin delavnice
 	df_termin = pd.DataFrame(data, columns=["Timestamp", "Ime in priimek", "Email"])
 	safe_termin_label = "".join(c if c.isalnum() else "_" for c in termin_label)
